@@ -42,6 +42,7 @@ app.use(
     ":method :url :status :res[content-length] - :response-time ms :post-response",
   ),
 );
+app.use(express.static("dist"))
 
 app.get("/api/persons", (req, res) => {
   res.json(persons);
