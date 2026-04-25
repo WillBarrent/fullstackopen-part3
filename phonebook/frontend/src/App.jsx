@@ -64,11 +64,21 @@ const App = () => {
         number: newPhoneNumber,
       };
 
-      personServices.create(person).then((data) => {
-        setPersons(persons.concat(data));
-        setNewName("");
-        setNewPhoneNumber("");
-      });
+      personServices
+        .create(person)
+        .then((data) => {
+          setPersons(persons.concat(data));
+          setNewName("");
+          setNewPhoneNumber("");
+        })
+        .catch((error) => {
+          setMessage(error.response.data.error);
+          setSuccess(false);
+          setTimeout(() => {
+            setMessage(null);
+            setSuccess(null);
+          }, 5000);
+        });
 
       setMessage(`Added ${person.name}`);
       setSuccess(true);
